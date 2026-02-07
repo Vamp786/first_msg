@@ -7,15 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const letter = document.getElementById('letter');
     const heart = document.getElementById('heart');
 
-    // Scene 1: Click mailbox to open and transition to Scene 2
-    mailbox.addEventListener('click', () => {
+    // Function to handle mailbox click/tap
+    const handleMailboxClick = () => {
+        console.log('Mailbox clicked!'); // Debugging: Check console to confirm click
         mailbox.classList.add('open'); // Animate door open
+        mailbox.style.animation = 'none'; // Stop bounce animation on click
         setTimeout(() => {
             scene1.classList.remove('active');
             scene2.classList.add('active');
             letter.classList.add('open'); // Animate letter slide/open
-        }, 500); // Delay for smooth transition
-    });
+        }, 600); // Increased delay to match longer door animation
+    };
+
+    // Scene 1: Click/tap mailbox to open and transition to Scene 2
+    mailbox.addEventListener('click', handleMailboxClick);
+    mailbox.addEventListener('touchstart', handleMailboxClick); // Fallback for mobile touch
 
     // Scene 2: Click heart to transition to Scene 3
     heart.addEventListener('click', () => {
