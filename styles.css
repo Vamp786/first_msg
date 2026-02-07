@@ -1,0 +1,310 @@
+/* CSS Variables for easy customization */
+:root {
+    --primary-pink: #ffb3ba;
+    --soft-peach: #ffdfba;
+    --rose-tone: #ffffba;
+    --accent-rose: #baffc9;
+    --text-color: #5a5a5a;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--primary-pink), var(--soft-peach), var(--rose-tone));
+    color: var(--text-color);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px; /* Mobile-first, scales up */
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Scene Management */
+.scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scene.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Background Animations: Floating Hearts and Petals */
+.background-animations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-heart, .floating-petal {
+    position: absolute;
+    animation: float 6s infinite linear;
+}
+
+.floating-heart {
+    font-size: 2em;
+    color: var(--accent-rose);
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.floating-heart:nth-child(2) {
+    top: 30%;
+    left: 70%;
+    animation-delay: 2s;
+}
+
+.floating-heart:nth-child(3) {
+    top: 60%;
+    left: 10%;
+    animation-delay: 4s;
+}
+
+.floating-petal {
+    width: 20px;
+    height: 30px;
+    background: var(--rose-tone);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 20%;
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.floating-petal:nth-child(2) {
+    top: 50%;
+    left: 80%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+    50% { transform: translateY(-20vh) rotate(180deg); opacity: 1; }
+    100% { transform: translateY(-40vh) rotate(360deg); opacity: 0; }
+}
+
+/* First Screen: Mailbox */
+.mailbox {
+    width: 120px;
+    height: 100px;
+    background: #8b4513;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.mailbox-door {
+    width: 60px;
+    height: 80px;
+    background: #654321;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    border-radius: 5px;
+    transform-origin: bottom;
+    transition: transform 0.3s ease;
+}
+
+.mailbox.open .mailbox-door {
+    transform: rotateY(-90deg);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Second Screen: Letter */
+.letter {
+    width: 90%;
+    max-width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.letter.open {
+    transform: scale(1);
+}
+
+.romantic-text {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Bunny Couple */
+.bunny-couple {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.bunny {
+    width: 60px;
+    height: 80px;
+    position: relative;
+    animation: bunny-bounce 3s infinite;
+}
+
+.bunny-male .face { background: #f4a261; } /* Light orange for male */
+.bunny-female .face { background: #e9c46a; } /* Light yellow for female */
+
+.ear {
+    width: 15px;
+    height: 30px;
+    background: inherit;
+    position: absolute;
+    top: -10px;
+    border-radius: 50% 50% 0 0;
+}
+
+.ear.left { left: 10px; }
+.ear.right { right: 10px; }
+
+.face {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+}
+
+.eye {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    animation: blink 4s infinite;
+}
+
+.eye.left { left: 10px; }
+.eye.right { right: 10px; }
+
+.nose {
+    width: 6px;
+    height: 4px;
+    background: #ff6b6b;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    left: 22px;
+}
+
+.mouth {
+    width: 10px;
+    height: 5px;
+    border: 2px solid #000;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+}
+
+@keyframes bunny-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0; }
+}
+
+/* Pulsing Heart */
+.pulsing-heart {
+    font-size: 2em;
+    margin: 20px auto 0;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+    display: block;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Third Screen: Options */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-btn {
+    padding: 10px 20px;
+    background: var(--accent-rose);
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    animation: pop-in 0.5s ease;
+}
+
+.option-btn:hover {
+    transform: scale(1.05);
+    background: var(--primary-pink);
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 600px) {
+    .container { max-width: 500px; }
+    .mailbox { width: 150px; height: 120px; }
+    .bunny { width: 80px; height: 100px; }
+}
